@@ -1,35 +1,64 @@
 <script src="digiQR.min.js"></script>
-<img id="qr">
+<img id="qr"><br>
+<select id="command">
+	<option value="request">Request 1DGB</option>
+	<option value="explorer">Explorer URL</option>
+	<option value="address">Address</option>
+</select><br>
+<select id="logo">
+	<option value="0">None</option>
+	<option value="1">Small logo with white box</option>
+	<option value="2">Small logo with white circle</option>
+	<option value="4">Small logo with no boarder</option>
+	<option value="5" selected>Large logo with light circles</option>
+	<option value="6">Large logo with light squares</option>
+</select>
 <script>
-	//document.getElementById("qr").src = DigiQR.text("A",200,6);
-	document.getElementById("qr").src = DigiQR.request("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",10,200,6);
+	function redraw() {
+		var e=document.getElementById("logo");
+		var logo=e.options[e.selectedIndex].value;
+		e=document.getElementById("command");
+		var command=e.options[e.selectedIndex].value;
+	
+		//document.getElementById("qr").src = DigiQR.text("A",200,6);
+		if (command=="request") {
+			document.getElementById("qr").src = DigiQR['request']("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",1,200,logo);
+		} else {
+			document.getElementById("qr").src = DigiQR[command]("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",200,logo);
+		}
+				
+		/*
+			Place image tag in your html
+				<img id="qr">
 			
-	/*
-		Place image tag in your html
-			<img id="qr">
+			Set the img src pick one:
+				document.getElementById("qr").src = DigiQR.request(DIGIBYTE_ADDRESS,DIGIBYTE_AMOUNT_REQUESTED,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+				document.getElementById("qr").src = DigiQR.text(VALUE,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+				document.getElementById("qr").src = DigiQR.explorer(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+				document.getElementById("qr").src = DigiQR.address(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+				
+				DIGIBYTE_ADDRESS:			(string) containing public address (private key can be used with address)
+				DIGIBYTE_AMOUNT_REQUESTED:	(float) number of digibyte requesting
+				OPTIONAL_SIZE:				defaults to 200 pixels
+				OPTIONAL_LOGO_VERSION:		0,false,undefined	no logo
+											1,true			 	logo with white box
+											2					logo with white circle
+											4					logo with no boarder
+											5					large logo with white dots
+											6					large logo with white squares		
+				
+				
+				
 		
-		Set the img src pick one:
-			document.getElementById("qr").src = DigiQR.request(DIGIBYTE_ADDRESS,DIGIBYTE_AMOUNT_REQUESTED,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
-			document.getElementById("qr").src = DigiQR.text(VALUE,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
-			document.getElementById("qr").src = DigiQR.explorer(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
-			document.getElementById("qr").src = DigiQR.address(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
-			
-			DIGIBYTE_ADDRESS:			(string) containing public address (private key can be used with address)
-			DIGIBYTE_AMOUNT_REQUESTED:	(float) number of digibyte requesting
-			OPTIONAL_SIZE:				defaults to 200 pixels
-			OPTIONAL_LOGO_VERSION:		0,false,undefined	no logo
-										1,true			 	logo with white box
-										2					logo with white circle
-										4					logo with no boarder
-										5					large logo with white dots
-										6					large logo with white squares		
-			
-			
-			
+		
+		
+		
+		*/
+	}
+	document.getElementById("logo").addEventListener("change",redraw);
+	document.getElementById("command").addEventListener("change",redraw);
+	redraw();
 	
 	
-	
-	
-	*/
 	
 </script>
