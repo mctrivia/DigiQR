@@ -1,2 +1,35 @@
 # DigiQR
 QR code generator for digibyte
+
+Place image tag in your html
+	<img id="qr">
+		
+Set the img src pick one:
+
+Encode anything into a qr code:
+	document.getElementById("qr").src = DigiQR.text(VALUE,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+
+Encode payment request
+	document.getElementById("qr").src = DigiQR.request(DIGIBYTE_ADDRESS,DIGIBYTE_AMOUNT_REQUESTED,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+
+Encode digibyte address with link to explorer
+	document.getElementById("qr").src = DigiQR.explorer(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+
+Encode digibyte address.  Can encode private keys also
+	document.getElementById("qr").src = DigiQR.address(DIGIBYTE_ADDRESS,OPTIONAL_SIZE,OPTIONAL_LOGO_VERSION);
+
+
+
+Variable definitions:
+	DIGIBYTE_ADDRESS:		(string) containing public address (private key can be used with address)
+	DIGIBYTE_AMOUNT_REQUESTED:	(float) number of digibyte requesting
+	OPTIONAL_SIZE:			defaults to 200 pixels
+	OPTIONAL_LOGO_VERSION:		0,false,undefined	no logo
+					1,true			logo with white box
+					2			logo with white circle
+					4			logo with no boarder
+					5			large logo with white dots
+					6			large logo with white squares
+
+If you found this helpful please donate:
+Digibyte: DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq 
