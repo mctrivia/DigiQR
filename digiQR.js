@@ -2205,6 +2205,77 @@ var qrcode = function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //---------------------------------------------------------------------
 //
 // DigiQR for JavaScript
@@ -2215,91 +2286,189 @@ var qrcode = function() {
 //  http://www.opensource.org/licenses/mit-license.php
 //---------------------------------------------------------------------
 
+	function createCorners(p4,radius,color) {
+		/*
+			0		p1		p2		p3		p4
+			
+			
+			p1
+			
+			
+			
+			p2
+			
+			
+			
+			p3
+			
+			
+			
+			p4
+		*/
+		var p2=p4*0.5,
+			r=p2*radius,
+			p1=p2-r,
+			p3=p2+r;			
+		var corner=[];
+		for (var i=0;i<16;i++) {
+			//setup corner canvas
+			var canvasCorner=document['createElement']('canvas');				//create a canvas for corners
+			canvasCorner['height']=canvasCorner['width']=p4;				//set canvas dimensions to dot size
+			var cc=canvasCorner['getContext']('2d');						//get canvas context
+			cc['fillStyle']=color;
+			
+			//draw corners
+			function drawCorner(v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11) {
+				cc['beginPath']();
+				cc['moveTo'](v0,v1);
+				cc['lineTo'](v2,v3);
+				cc['lineTo'](v4,v5);
+				cc['arc'](v6,v7,r,v8*Math.PI,v9*Math.PI);
+				cc['lineTo'](v10,v11);
+				cc['lineTo'](v0,v1);
+				cc['closePath']();
+				cc['fill']();
+			}
+			if ((i==1)||(i==9)) drawCorner(p4,p4,p2,p4,p2,p3,p3,p3,  1,1.5,p4,p2);			//draw bottom left
+			if ((i==8)||(i==9)) drawCorner( 0, 0,p2, 0,p2,p1,p1,p1,  0,0.5, 0,p2);			//draw top left
+			if ((i==4)||(i==6)) drawCorner(p4, 0,p4,p2,p3,p2,p3,p1,0.5,  1,p2,0);			//draw top right
+			if ((i==2)||(i==6)) drawCorner( 0,p4, 0,p2,p1,p2,p1,p3,1.5,  0,p2,p4);			//draw bottom left
+			
+			//draw flats
+			if (i==3)  cc['fillRect'](0,p2,p4,p2);											//draw bottom
+			if (i==12) cc['fillRect'](0,0,p4,p2);											//draw top
+			if (i==10) cc['fillRect'](0,0,p2,p4);											//draw left
+			if (i==5)  cc['fillRect'](p2,0,p2,p4);											//draw right
+			if (i==15) cc['fillRect'](0,0,p4,p4);											//draw full
+			
+			//draw missing top left
+			function drawMissingCorner(v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15) {
+				cc['beginPath']();
+				cc['moveTo'](v0,v1);
+				cc['lineTo'](v2,v3);
+				cc['lineTo'](v4,v5);
+				cc['lineTo'](v6,v7);
+				cc['arc'](v8,v9,r,v10*Math.PI,v11*Math.PI);
+				cc['lineTo'](v12,v13);
+				cc['lineTo'](v14,v15);
+				cc['lineTo'](v0,v1);
+				cc['closePath']();
+				cc['fill']();				
+			}
+			if (i==7)  drawMissingCorner(p4,p4,p4, 0,p2, 0,p2,p1,p1,p1,  0,0.5, 0,p2, 0,p4);	//draw missing top left
+			if (i==11) drawMissingCorner(0 ,p4,p4,p4,p4,p2,p3,p2,p3,p1,0.5,  1,p2, 0, 0, 0);	//draw missing top right
+			if (i==13) drawMissingCorner(p4, 0, 0, 0, 0,p2,p1,p2,p1,p3,1.5,  0,p2,p4,p4,p4);	//draw missing bottom left
+			if (i==14) drawMissingCorner(0 , 0, 0,p4,p2,p4,p2,p3,p3,p3,1  ,1.5,p4,p2,p4, 0);	//draw missing bottom right
+			
+			//save corner
+			corner[i]=canvasCorner;
+		}
+		
+		return corner;
+	}
 	function drawLogoBorder(ctx) {
-		ctx.beginPath();
-		ctx.fillStyle="#0066cc";
-		ctx.arc(0,0,0.891,0,2*Math.PI);
-		ctx.closePath();
-		ctx.fill();
-		ctx.beginPath();
-		ctx.fillStyle="#002352";
-		ctx.arc(0,0,0.709,0,2*Math.PI);
-		ctx.closePath();
-		ctx.fill();
+		ctx['beginPath']();
+		ctx['fillStyle']="#0066cc";
+		ctx['arc'](0,0,0.891,0,2*Math.PI);
+		ctx['closePath']();
+		ctx['fill']();
+		ctx['beginPath']();
+		ctx['fillStyle']="#002352";
+		ctx['arc'](0,0,0.709,0,2*Math.PI);
+		ctx['closePath']();
+		ctx['fill']();
 	}
 	function logoD(ctx) {
-		ctx.beginPath();
-		ctx.moveTo( 0.245,-0.361);
-		ctx.lineTo( 0.270,-0.428);
-		ctx.bezierCurveTo( 0.273,-0.435, 0.268,-0.442, 0.261,-0.442);
-		ctx.lineTo( 0.166,-0.442);
-		ctx.lineTo( 0.136,-0.363);
-		ctx.lineTo( 0.094,-0.363);
-		ctx.lineTo( 0.118,-0.428);
-		ctx.bezierCurveTo( 0.121,-0.435, 0.116,-0.442, 0.109,-0.442);
-		ctx.lineTo( 0.014,-0.442);
-		ctx.lineTo(-0.016,-0.363);
-		ctx.lineTo(-0.313,-0.363);
-		ctx.bezierCurveTo(-0.327,-0.363,-0.339,-0.356,-0.346,-0.344);
-		ctx.lineTo(-0.420,-0.214);
-		ctx.lineTo(-0.317,-0.214);
-		ctx.lineTo( 0.134,-0.214);
-		ctx.bezierCurveTo( 0.152,-0.214, 0.170,-0.211, 0.187,-0.204);
-		ctx.bezierCurveTo( 0.221,-0.190, 0.259,-0.160, 0.249,-0.091);
-		ctx.bezierCurveTo( 0.233, 0.024, 0.116, 0.228,-0.139, 0.231);
-		ctx.lineTo(-0.007,-0.111);
-		ctx.bezierCurveTo(-0.002,-0.125,-0.012,-0.140,-0.028,-0.140);
-		ctx.lineTo(-0.204,-0.140);
-		ctx.lineTo(-0.417, 0.383);
-		ctx.bezierCurveTo(-0.417, 0.383,-0.374, 0.388,-0.307, 0.388);
-		ctx.lineTo(-0.329, 0.443);
-		ctx.lineTo(-0.231, 0.443);
-		ctx.bezierCurveTo(-0.223, 0.443,-0.216, 0.439,-0.213, 0.431);
-		ctx.lineTo(-0.195, 0.384);
-		ctx.bezierCurveTo(-0.180, 0.383,-0.166, 0.381,-0.151, 0.379);
-		ctx.lineTo(-0.175, 0.443);
-		ctx.lineTo(-0.078, 0.443);
-		ctx.bezierCurveTo(-0.070, 0.443,-0.063, 0.439,-0.061, 0.431);
-		ctx.lineTo(-0.033, 0.359);
-		ctx.bezierCurveTo( 0.127, 0.323, 0.298, 0.243, 0.400, 0.076);
-		ctx.bezierCurveTo( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
-		ctx.closePath();
+		ctx['beginPath']();
+		ctx['moveTo']( 0.245,-0.361);
+		ctx['lineTo']( 0.270,-0.428);
+		ctx['bezierCurveTo']( 0.273,-0.435, 0.268,-0.442, 0.261,-0.442);
+		ctx['lineTo']( 0.166,-0.442);
+		ctx['lineTo']( 0.136,-0.363);
+		ctx['lineTo']( 0.094,-0.363);
+		ctx['lineTo']( 0.118,-0.428);
+		ctx['bezierCurveTo']( 0.121,-0.435, 0.116,-0.442, 0.109,-0.442);
+		ctx['lineTo']( 0.014,-0.442);
+		ctx['lineTo'](-0.016,-0.363);
+		ctx['lineTo'](-0.313,-0.363);
+		ctx['bezierCurveTo'](-0.327,-0.363,-0.339,-0.356,-0.346,-0.344);
+		ctx['lineTo'](-0.420,-0.214);
+		ctx['lineTo'](-0.317,-0.214);
+		ctx['lineTo']( 0.134,-0.214);
+		ctx['bezierCurveTo']( 0.152,-0.214, 0.170,-0.211, 0.187,-0.204);
+		ctx['bezierCurveTo']( 0.221,-0.190, 0.259,-0.160, 0.249,-0.091);
+		ctx['bezierCurveTo']( 0.233, 0.024, 0.116, 0.228,-0.139, 0.231);
+		ctx['lineTo'](-0.007,-0.111);
+		ctx['bezierCurveTo'](-0.002,-0.125,-0.012,-0.140,-0.028,-0.140);
+		ctx['lineTo'](-0.204,-0.140);
+		ctx['lineTo'](-0.417, 0.383);
+		ctx['bezierCurveTo'](-0.417, 0.383,-0.374, 0.388,-0.307, 0.388);
+		ctx['lineTo'](-0.329, 0.443);
+		ctx['lineTo'](-0.231, 0.443);
+		ctx['bezierCurveTo'](-0.223, 0.443,-0.216, 0.439,-0.213, 0.431);
+		ctx['lineTo'](-0.195, 0.384);
+		ctx['bezierCurveTo'](-0.180, 0.383,-0.166, 0.381,-0.151, 0.379);
+		ctx['lineTo'](-0.175, 0.443);
+		ctx['lineTo'](-0.078, 0.443);
+		ctx['bezierCurveTo'](-0.070, 0.443,-0.063, 0.439,-0.061, 0.431);
+		ctx['lineTo'](-0.033, 0.359);
+		ctx['bezierCurveTo']( 0.127, 0.323, 0.298, 0.243, 0.400, 0.076);
+		ctx['bezierCurveTo']( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
+		ctx['closePath']();
 	}
 	
 	
 	
-	function getQRCode(text,size,addLogo) {
+	function getQRCode(text,qrCodeSize,addLogo,radius) {
 		//figure out alphabet to use
 		var alphabet='Byte';
-		if (text==text.replace(/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \$\%\*\+\-\.\/\:]/g,"")) {
+		if (text==text['replace'](/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \$\%\*\+\-\.\/\:]/g,"")) {
 			alphabet='Alphanumeric';
 		}
 		
 		//define defaults for optional values
-		var qrCodeSize=qrCodeSize||200;										//set default size to 200 if not defined
-		var addLogo=addLogo||false;											//set default as false
+		qrCodeSize=qrCodeSize||200;										//set default size to 200 if not defined
+		addLogo=addLogo||false;											//set default as false
+		radius=radius||0;												//set default to 0
 		
 		//prep canvas for qr code
-		var canvas=document.createElement('canvas');						//create a canvas to work with
+		var canvas=document['createElement']('canvas');						//create a canvas to work with
 		canvas['height']=canvas['width']=qrCodeSize;						//set canvas dimensions default 200px
 		var ctx=canvas['getContext']('2d');									//get canvas context
 
 		//create qr code
 		var qr = qrcode(
 			0,																//make qr code as small as possible
-			addLogo?'H':'L'													//set error correction to 30% if adding logo otherwise 7%
+			(addLogo>0)?'H':'L'													//set error correction to 30% if adding logo otherwise 7%
 		);
-		qr.addData(text,alphabet);			
-		qr.make();															//calculate qr code
-		var count=qr.getModuleCount();										//get qr code module count
+		qr['addData'](text,alphabet);			
+		qr['make']();															//calculate qr code
+		var count=qr['getModuleCount']();										//get qr code module count
 		var pixelSize=Math.floor(qrCodeSize/count);							//get max size of module that fits
 		var margin=Math.floor((qrCodeSize-count*pixelSize)/2);				//compute size of margin required to center
 		
 		//draw qr code
-		ctx.save();															//save so we can restore back to normal
-		ctx.translate(margin,margin);									//shift perspective so edge of qrcode is at 0
-		qr.renderTo2dContext(ctx,pixelSize);								//draw the qr code on the canvas
-	
+		ctx['save']();															//save so we can restore back to normal
+		ctx['translate'](margin,margin);										//shift perspective so edge of qrcode is at 0
+		ctx['fillStyle']="#000000";
+		ctx['fillRect'](0,0,count*pixelSize,count*pixelSize);
+		
+		//draw corners
+		function drawGrid(color) {
+			var corners=createCorners(pixelSize,radius,color);			//draw non dark areas in white
+		
+			function numFilter(x,y) {
+				if ((x<0)||(x>=count)||(y<0)||(y>=count)) return 1;
+				return (!qr['isDark'](x,y));
+			}
+			for (var y=-1;y<=count;y++) {											//go over each row
+				for (var x=-1;x<=count;x++) {										//go over each column
+					var i=numFilter(x,y)*8+numFilter(x+1,y)*4+numFilter(x,y+1)*2+numFilter(x+1,y+1);	//get corner type
+					ctx['drawImage'](corners[i],(x+0.5)*pixelSize,(y+0.5)*pixelSize);	//draw the corner on canvas
+				}
+			}		
+		}
+		drawGrid("#FFFFFF");												//draw grid with white light areas
 		
 		//add logo
 		var center=pixelSize*count/2;
@@ -2309,56 +2478,59 @@ var qrcode = function() {
 		} else {
 			logoSize*=(count-1)*0.5;										//logo mostly translucent so rules are simpler
 		}
-		ctx.save();
-		ctx.transform(logoSize,0,0,logoSize,center,center);
-		ctx.save();
+		ctx['save']();
+		ctx['transform'](logoSize,0,0,logoSize,center,center);
+		ctx['save']();
 		if (addLogo==1) {													//logo 1 make white box
-			ctx.beginPath();
-			ctx.fillStyle="#FFFFFF";
-			ctx.rect(-1,-1,2,2);
-			ctx.closePath();
-			ctx.fill();
+			ctx['beginPath']();
+			ctx['fillStyle']="#FFFFFF";
+			ctx['rect'](-1,-1,2,2);
+			ctx['closePath']();
+			ctx['fill']();
 		}
 		if (addLogo==2) {													//logo 2 white circle
-			ctx.beginPath();
-			ctx.fillStyle="#FFFFFF";
-			ctx.arc(0,0,1,0,2*Math.PI);
-			ctx.closePath();
-			ctx.fill();
+			ctx['beginPath']();
+			ctx['fillStyle']="#FFFFFF";
+			ctx['arc'](0,0,1,0,2*Math.PI);
+			ctx['closePath']();
+			ctx['fill']();
 		}
 		if (addLogo>0) {
 			drawLogoBorder(ctx);												//draw the outer boarder
-			ctx.fillStyle="#FFFFFF";											//set d color to be white
+			ctx['fillStyle']="#FFFFFF";											//set d color to be white
 			logoD(ctx);															//define d area	
-			ctx.fill();															//fill in d area
+			ctx['fill']();															//fill in d area
 		}
-		ctx.restore();
-		ctx.restore();
-		if (addLogo>=5) {														
-			ctx.save();
-			ctx.transform(pixelSize,0,0,pixelSize,pixelSize/2,pixelSize/2);		//adjust size to make drawing dots easy
-			ctx.save();
-			ctx.fillStyle="rgba(255,255,255,0.5)";								//set to draw translucent white
+		ctx['restore']();
+		ctx['restore']();
+		if (addLogo==5) {														
+			ctx['save']();
+			ctx['transform'](pixelSize,0,0,pixelSize,pixelSize/2,pixelSize/2);		//adjust size to make drawing dots easy
+			ctx['save']();
+			ctx['fillStyle']="rgba(255,255,255,0.5)";								//set to draw translucent white
 			for (var y=0;y<count;y++) {											//go over each row
 				for (var x=0;x<count;x++) {										//go over each column
-					if (!qr.isDark(x,y)) {										//see if square is white
-						ctx.beginPath();
-						if (addLogo==5) ctx.arc(x,y,0.5,0,2*Math.PI);			//define dot if logo 5
-						if (addLogo==6)	ctx.rect(x-0.5,y-0.5,1,1);				//define square if logo 6
-						ctx.closePath();
-						ctx.fill();												//draw defined shape
+					if (!qr['isDark'](x,y)) {										//see if square is white
+						ctx['beginPath']();
+						if (addLogo==5) ctx['arc'](x,y,0.5,0,2*Math.PI);			//define dot if logo 5
+						if (addLogo==6)	ctx['rect'](x-0.5,y-0.5,1,1);				//define square if logo 6
+						ctx['closePath']();
+						ctx['fill']();												//draw defined shape
 					}
 				}
 			}
-			ctx.restore();
-			ctx.restore();
+			ctx['restore']();
+			ctx['restore']();
 		}	
+		if (addLogo==6) {
+			drawGrid("rgba(255,255,255,0.5)");
+		}
 			
 			
 			
 		
-		ctx.restore();														//restore so image is centered
-		return canvas.toDataURL("image/jpg");								//convert canvas into a jpg
+		ctx['restore']();														//restore so image is centered
+		return canvas['toDataURL']("image/jpg");								//convert canvas into a jpg
 	}
 	
 	
@@ -2375,37 +2547,35 @@ var qrcode = function() {
 	
 	//DigiQR
 	$["DigiQR"]={																//create interface for external scripts
-		"request": function(address,amount,size,logo) {							//request payment interface
+		"request": function(address,amount,size,logo,radius) {					//request payment interface
 			return getQRCode(
-						'digibyte:'+address+'?amount='+(amount).toFixed(8),
+						'digibyte:'+address+'?amount='+(amount)['toFixed'](8),
 						size,
-						logo
+						logo,
+						radius
 					); 
 		},
-		"address": function(address,size,logo) {									//general address interface
-			return getQRCode(
-						address,
-						size,
-						logo
-					);
-		},
-		"explorer": function(address,size,logo) {								//explorer interface
+		"address": noProcess,													//general address interface
+		"explorer": function(address,size,logo,radius) {						//explorer interface
 			return getQRCode(
 						'https://digiexplorer.info/address/'+address,
 						size,
-						logo
+						logo,
+						radius
 					);
 		},
-		"text": function(text,size,logo) {										//text interface(Same as address but added because some times calling this makes more sense)
-			return getQRCode(
-						text,
-						size,
-						logo
-					);
-		}
+		"text": noProcess,														//text interface(Same as address but added because some times calling this makes more sense)
+
 	};
-	
+	function noProcess(text,size,logo,radius) {									//text interface(Same as address but added because some times calling this makes more sense)
+		return getQRCode(
+					text,
+					size,
+					logo,
+					radius
+				);
+	}
 	
 	
 
-})(window);		//used to reduce variable cluter and assist in minimization
+})(window);		//used to reduce variable clutter and assist in minimization

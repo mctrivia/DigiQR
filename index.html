@@ -1,5 +1,9 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <script src="digiQR.min.js"></script>
+<img id="c1"><br>
 <img id="qr"><br>
+Address: <input type="text" id="address" value="DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq"><br>
 <select id="command">
 	<option value="request">Request 1DGB</option>
 	<option value="explorer">Explorer URL</option>
@@ -12,19 +16,23 @@
 	<option value="4">Small logo with no boarder</option>
 	<option value="5" selected>Large logo with light circles</option>
 	<option value="6">Large logo with light squares</option>
-</select>
+</select><br>
+Radius: <input type="range" id="radius" min="0" max="100" value="50"><br>
 <script>
 	function redraw() {
 		var e=document.getElementById("logo");
 		var logo=e.options[e.selectedIndex].value;
 		e=document.getElementById("command");
 		var command=e.options[e.selectedIndex].value;
+		var address=document.getElementById("address").value;
+		var r=document.getElementById("radius").value/100;
+		
 	
 		//document.getElementById("qr").src = DigiQR.text("A",200,6);
 		if (command=="request") {
-			document.getElementById("qr").src = DigiQR['request']("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",1,200,logo);
+			document.getElementById("qr").src = DigiQR['request'](address,1,300,logo,r);
 		} else {
-			document.getElementById("qr").src = DigiQR[command]("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",200,logo);
+			document.getElementById("qr").src = DigiQR[command](address,300,logo,r);
 		}
 				
 		/*
@@ -55,8 +63,10 @@
 		
 		*/
 	}
+	document.getElementById("address").addEventListener("change",redraw);
 	document.getElementById("logo").addEventListener("change",redraw);
 	document.getElementById("command").addEventListener("change",redraw);
+	document.getElementById("radius").addEventListener("change",redraw);
 	redraw();
 	
 	
