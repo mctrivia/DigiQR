@@ -2453,12 +2453,31 @@ var qrcode = function() {
 		ctx['fillStyle']="#000000";
 		ctx['fillRect'](0,0,count*pixelSize,count*pixelSize);
 		
+		//calculate logo size
+		var center=pixelSize*count/2;
+		var logoSize=pixelSize;
+		if (addLogo<5) {
+			logoSize*=Math.min(Math.floor((Math.sqrt(0.2*count*count)+1)/2)-0.5,(count-16)*0.5);	//cover up to 20% of logo but make sure not covering eyes
+		} else if(addLogo<7) {
+			logoSize*=(count-1)*0.5;												//logo mostly translucent so rules are simpler
+		} else {
+			logoSize*=Math.min(1.12*Math.sqrt(count*count*0.5)-11.08,count*0.56);	//make logo as big as possible to not touch eyes
+		}		
+		
 		//draw corners
 		function drawGrid(color) {
 			var corners=createCorners(pixelSize,radius,color);			//draw non dark areas in white
+			var rsMax=logoSize/pixelSize;								//get number of modules logo is across
+			rsMax*=rsMax;												//get square of radius
 		
 			function numFilter(x,y) {
 				if ((x<0)||(x>=count)||(y<0)||(y>=count)) return 1;
+				if (addLogo==3) {
+					var cc=(count-1)/2;													//count center
+					var dx=(x-cc);													//distance from center x
+					var dy=(y-cc);													//distance from center y
+					if (dx*dx+dy*dy<=rsMax) return 1;								//if within radius squared calculated earlier then set as color
+				}
 				return (!qr['isDark'](x,y));
 			}
 			for (var y=-1;y<=count;y++) {											//go over each row
@@ -2471,13 +2490,6 @@ var qrcode = function() {
 		drawGrid("#FFFFFF");												//draw grid with white light areas
 		
 		//add logo
-		var center=pixelSize*count/2;
-		var logoSize=pixelSize;
-		if (addLogo<5) {
-			logoSize*=Math.min(Math.floor((Math.sqrt(0.2*count*count)+1)/2)-0.5,(count-16)*0.5);	//cover up to 20% of logo but make sure not covering eyes
-		} else {
-			logoSize*=(count-1)*0.5;										//logo mostly translucent so rules are simpler
-		}
 		ctx['save']();
 		ctx['transform'](logoSize,0,0,logoSize,center,center);
 		ctx['save']();
@@ -2503,20 +2515,21 @@ var qrcode = function() {
 		}
 		ctx['restore']();
 		ctx['restore']();
-		if (addLogo==5) {														
+		if ((addLogo==5)||(addLogo==7)) {														
 			ctx['save']();
 			ctx['transform'](pixelSize,0,0,pixelSize,pixelSize/2,pixelSize/2);		//adjust size to make drawing dots easy
 			ctx['save']();
-			ctx['fillStyle']="rgba(255,255,255,0.5)";								//set to draw translucent white
 			for (var y=0;y<count;y++) {											//go over each row
 				for (var x=0;x<count;x++) {										//go over each column
-					if (!qr['isDark'](x,y)) {										//see if square is white
+					function drawDot(size,color) {
+						ctx['fillStyle']=color;
 						ctx['beginPath']();
-						if (addLogo==5) ctx['arc'](x,y,0.5,0,2*Math.PI);			//define dot if logo 5
-						if (addLogo==6)	ctx['rect'](x-0.5,y-0.5,1,1);				//define square if logo 6
+						ctx['arc'](x,y,size,0,2*Math.PI);						//define dot
 						ctx['closePath']();
-						ctx['fill']();												//draw defined shape
+						ctx['fill']();	
 					}
+					if ((addLogo==5)&&(!qr['isDark'](x,y))) drawDot(0.5,"rgba(255,255,255,0.5)");	//make translucent white dots
+					if (addLogo==7) drawDot(0.2,(qr['isDark'](x,y))?'#000000':'#FFFFFF');			//make small dot for both colors
 				}
 			}
 			ctx['restore']();
@@ -2525,9 +2538,6 @@ var qrcode = function() {
 		if (addLogo==6) {
 			drawGrid("rgba(255,255,255,0.5)");
 		}
-			
-			
-			
 		
 		ctx['restore']();														//restore so image is centered
 		return canvas['toDataURL']("image/jpg");								//convert canvas into a jpg
