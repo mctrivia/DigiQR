@@ -21,6 +21,7 @@ Address: <input type="text" id="address" value="DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqw
 </select><br>
 Radius: <input type="range" id="radius" min="0" max="100" value="50"><br>
 
+<div id="code" style="padding:30px;border:1px solid;"></div>
 
 <hr>
 
@@ -36,14 +37,17 @@ DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq
 		var command=e.options[e.selectedIndex].value;
 		var address=document.getElementById("address").value;
 		var r=document.getElementById("radius").value/100;
-		
+		var code='&lt;script&gt;<br>document.getElementById("qr").src = DigiQR.';
 	
 		//document.getElementById("qr").src = DigiQR.text("A",200,6);
 		if (command=="request") {
 			document.getElementById("qr").src = DigiQR['request'](address,1,300,logo,r);
+			code+='request("'+address+'",1,300,'+logo+','+r+');';
 		} else {
 			document.getElementById("qr").src = DigiQR[command](address,300,logo,r);
+			code+=command+'("'+address+'",300,'+logo+','+r+');';
 		}
+		document.getElementById("code").innerHTML=code+'<br>&lt;/script&gt;';
 				
 		/*
 			Place image tag in your html
