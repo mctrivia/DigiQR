@@ -37,7 +37,7 @@ DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq
 		var command=e.options[e.selectedIndex].value;
 		var address=document.getElementById("address").value;
 		var r=document.getElementById("radius").value/100;
-		var code='&lt;script&gt;<br>document.getElementById("qr").src = DigiQR.';
+		var code='&lt;img id="qr"&gt;<br>&lt;script&gt;<br>document.getElementById("qr").src = DigiQR.';
 	
 		//document.getElementById("qr").src = DigiQR.text("A",200,6);
 		if (command=="request") {
