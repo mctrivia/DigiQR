@@ -20,6 +20,14 @@ Address: <input type="text" id="address" value="DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqw
 	<option value="7">Larger logo with small dots</option>
 </select><br>
 Radius: <input type="range" id="radius" min="0" max="100" value="50"><br>
+
+
+<hr>
+
+Code here: <a href="https://github.com/mctrivia/DigiQR">GitHub Code</a><br>
+Donations Welcome:<br>
+<img id="donate"><br>
+DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq
 <script>
 	function redraw() {
 		var e=document.getElementById("logo");
@@ -72,5 +80,6 @@ Radius: <input type="range" id="radius" min="0" max="100" value="50"><br>
 	redraw();
 	
 	
+	document.getElementById("donate").src=DigiQR.address("DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq",200,6,1);
 	
 </script>
