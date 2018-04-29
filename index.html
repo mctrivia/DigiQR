@@ -20,7 +20,9 @@ Address: <input type="text" id="address" value="DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqw
 	<option value="7">Larger logo with small dots</option>
 </select><br>
 Radius: <input type="range" id="radius" min="0" max="100" value="50"><br>
-
+Width:	<input type="number" id="width" value="300"><br>
+<br>
+To install on your on web site <a href="digiQR.min.js" download>download digiQR.min.js</a> and put in same folder as your web site then use the bellow code in your page:<br>
 <div id="code" style="padding:30px;border:1px solid;"></div>
 
 <hr>
@@ -37,15 +39,20 @@ DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq
 		var command=e.options[e.selectedIndex].value;
 		var address=document.getElementById("address").value;
 		var r=document.getElementById("radius").value/100;
-		var code='&lt;img id="qr"&gt;<br>&lt;script&gt;<br>document.getElementById("qr").src = DigiQR.';
+		var width=document.getElementById("width").value;
+		var code='&lt;script src="digiQR.min.js"&gt;&lt;/script&gt;<br><br>&lt;img id="qr"&gt;<br>&lt;script&gt;<br>';
+		if (command=="request") {
+			code+='var amountDGB=1;<br>';
+		}
+		code+='document.getElementById("qr").src = DigiQR.';
 	
 		//document.getElementById("qr").src = DigiQR.text("A",200,6);
 		if (command=="request") {
-			document.getElementById("qr").src = DigiQR['request'](address,1,300,logo,r);
-			code+='request("'+address+'",1,300,'+logo+','+r+');';
+			document.getElementById("qr").src = DigiQR['request'](address,1,width,logo,r);
+			code+='request("'+address+'",amountDGB,'+width+','+logo+','+r+');';
 		} else {
-			document.getElementById("qr").src = DigiQR[command](address,300,logo,r);
-			code+=command+'("'+address+'",300,'+logo+','+r+');';
+			document.getElementById("qr").src = DigiQR[command](address,width,logo,r);
+			code+=command+'("'+address+'",'+width+','+logo+','+r+');';
 		}
 		document.getElementById("code").innerHTML=code+'<br>&lt;/script&gt;';
 				
@@ -81,6 +88,7 @@ DMw9wz6KHsvbvXsmo1Q8BajWcohYwjqwoq
 	document.getElementById("logo").addEventListener("change",redraw);
 	document.getElementById("command").addEventListener("change",redraw);
 	document.getElementById("radius").addEventListener("change",redraw);
+	document.getElementById("width").addEventListener("change",redraw);
 	redraw();
 	
 	
