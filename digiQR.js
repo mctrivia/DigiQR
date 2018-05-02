@@ -2378,58 +2378,276 @@ var qrcode = function() {
 		ctx['closePath']();
 		ctx['fill']();
 	}
-	function logoD(ctx) {
-		ctx['beginPath']();
-		ctx['moveTo']( 0.245,-0.361);
-		ctx['lineTo']( 0.270,-0.428);
-		ctx['bezierCurveTo']( 0.273,-0.435, 0.268,-0.442, 0.261,-0.442);
-		ctx['lineTo']( 0.166,-0.442);
-		ctx['lineTo']( 0.136,-0.363);
-		ctx['lineTo']( 0.094,-0.363);
-		ctx['lineTo']( 0.118,-0.428);
-		ctx['bezierCurveTo']( 0.121,-0.435, 0.116,-0.442, 0.109,-0.442);
-		ctx['lineTo']( 0.014,-0.442);
-		ctx['lineTo'](-0.016,-0.363);
-		ctx['lineTo'](-0.313,-0.363);
-		ctx['bezierCurveTo'](-0.327,-0.363,-0.339,-0.356,-0.346,-0.344);
-		ctx['lineTo'](-0.420,-0.214);
-		ctx['lineTo'](-0.317,-0.214);
-		ctx['lineTo']( 0.134,-0.214);
-		ctx['bezierCurveTo']( 0.152,-0.214, 0.170,-0.211, 0.187,-0.204);
-		ctx['bezierCurveTo']( 0.221,-0.190, 0.259,-0.160, 0.249,-0.091);
-		ctx['bezierCurveTo']( 0.233, 0.024, 0.116, 0.228,-0.139, 0.231);
-		ctx['lineTo'](-0.007,-0.111);
-		ctx['bezierCurveTo'](-0.002,-0.125,-0.012,-0.140,-0.028,-0.140);
-		ctx['lineTo'](-0.204,-0.140);
-		ctx['lineTo'](-0.417, 0.383);
-		ctx['bezierCurveTo'](-0.417, 0.383,-0.374, 0.388,-0.307, 0.388);
-		ctx['lineTo'](-0.329, 0.443);
-		ctx['lineTo'](-0.231, 0.443);
-		ctx['bezierCurveTo'](-0.223, 0.443,-0.216, 0.439,-0.213, 0.431);
-		ctx['lineTo'](-0.195, 0.384);
-		ctx['bezierCurveTo'](-0.180, 0.383,-0.166, 0.381,-0.151, 0.379);
-		ctx['lineTo'](-0.175, 0.443);
-		ctx['lineTo'](-0.078, 0.443);
-		ctx['bezierCurveTo'](-0.070, 0.443,-0.063, 0.439,-0.061, 0.431);
-		ctx['lineTo'](-0.033, 0.359);
-		ctx['bezierCurveTo']( 0.127, 0.323, 0.298, 0.243, 0.400, 0.076);
-		ctx['bezierCurveTo']( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
-		ctx['closePath']();
+	function logoD(ctx,symbol) {
+		ctx.save();
+		if (symbol==0) {
+			ctx['fillStyle']="#FFFFFF";											//set d color to be white
+			ctx['beginPath']();
+			ctx['moveTo']( 0.245,-0.361);
+			ctx['lineTo']( 0.270,-0.428);
+			ctx['bezierCurveTo']( 0.273,-0.435, 0.268,-0.442, 0.261,-0.442);
+			ctx['lineTo']( 0.166,-0.442);
+			ctx['lineTo']( 0.136,-0.363);
+			ctx['lineTo']( 0.094,-0.363);
+			ctx['lineTo']( 0.118,-0.428);
+			ctx['bezierCurveTo']( 0.121,-0.435, 0.116,-0.442, 0.109,-0.442);
+			ctx['lineTo']( 0.014,-0.442);
+			ctx['lineTo'](-0.016,-0.363);
+			ctx['lineTo'](-0.313,-0.363);
+			ctx['bezierCurveTo'](-0.327,-0.363,-0.339,-0.356,-0.346,-0.344);
+			ctx['lineTo'](-0.420,-0.214);
+			ctx['lineTo'](-0.317,-0.214);
+			ctx['lineTo']( 0.134,-0.214);
+			ctx['bezierCurveTo']( 0.152,-0.214, 0.170,-0.211, 0.187,-0.204);
+			ctx['bezierCurveTo']( 0.221,-0.190, 0.259,-0.160, 0.249,-0.091);
+			ctx['bezierCurveTo']( 0.233, 0.024, 0.116, 0.228,-0.139, 0.231);
+			ctx['lineTo'](-0.007,-0.111);
+			ctx['bezierCurveTo'](-0.002,-0.125,-0.012,-0.140,-0.028,-0.140);
+			ctx['lineTo'](-0.204,-0.140);
+			ctx['lineTo'](-0.417, 0.383);
+			ctx['bezierCurveTo'](-0.417, 0.383,-0.374, 0.388,-0.307, 0.388);
+			ctx['lineTo'](-0.329, 0.443);
+			ctx['lineTo'](-0.231, 0.443);
+			ctx['bezierCurveTo'](-0.223, 0.443,-0.216, 0.439,-0.213, 0.431);
+			ctx['lineTo'](-0.195, 0.384);
+			ctx['bezierCurveTo'](-0.180, 0.383,-0.166, 0.381,-0.151, 0.379);
+			ctx['lineTo'](-0.175, 0.443);
+			ctx['lineTo'](-0.078, 0.443);
+			ctx['bezierCurveTo'](-0.070, 0.443,-0.063, 0.439,-0.061, 0.431);
+			ctx['lineTo'](-0.033, 0.359);
+			ctx['bezierCurveTo']( 0.127, 0.323, 0.298, 0.243, 0.400, 0.076);
+			ctx['bezierCurveTo']( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
+			ctx['closePath']();
+			ctx['fill']();															//fill in d area
+		} else {
+			ctx.miterLimit="0";
+			/*
+			ctx.save();
+			ctx.fillStyle="#0066CC";
+			ctx.beginPath();
+			ctx.arc(0,0,0.92,0,6.2832,1);
+			ctx.moveTo(0,-1);
+			ctx.bezierCurveTo(-0.553,-1,-1,-0.552,-1,0);
+			ctx.bezierCurveTo(-1,0.552,-0.552,1,0,1);
+			ctx.bezierCurveTo(0.552,1,1,0.552,1,0);
+			ctx.bezierCurveTo(1,-0.552,0.553,-1,0,-1);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+			ctx.save();
+			ctx.fillStyle="#002352";
+			ctx.beginPath();
+			ctx.arc(0,0,0.92,0,6.2832,1);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+			*/
+			ctx.save();
+			ctx.save();
+			ctx.globalAlpha="0.3";
+			ctx.fillStyle="#FFFFFF";
+			ctx.beginPath();
+			ctx.moveTo(0.163,0.589);
+			ctx.bezierCurveTo(0.161,0.589,0.158,0.589,0.156,0.588);
+			ctx.bezierCurveTo(0.066,0.562,0.008,0.526,-0.053,0.461);
+			ctx.bezierCurveTo(-0.132,0.376,-0.175,0.264,-0.175,0.144);
+			ctx.bezierCurveTo(-0.175,0.045,-0.098,-0.035,-0.001,-0.035);
+			ctx.bezierCurveTo(0.095,-0.035,0.172,0.045,0.172,0.144);
+			ctx.bezierCurveTo(0.172,0.209,0.225,0.262,0.289,0.262);
+			ctx.bezierCurveTo(0.353,0.262,0.406,0.209,0.406,0.144);
+			ctx.bezierCurveTo(0.406,-0.085,0.223,-0.271,-0.002,-0.271);
+			ctx.bezierCurveTo(-0.162,-0.271,-0.308,-0.174,-0.374,-0.026);
+			ctx.bezierCurveTo(-0.395,0.023,-0.407,0.08,-0.407,0.144);
+			ctx.bezierCurveTo(-0.407,0.192,-0.403,0.266,-0.369,0.363);
+			ctx.bezierCurveTo(-0.364,0.379,-0.371,0.396,-0.386,0.402);
+			ctx.bezierCurveTo(-0.401,0.408,-0.417,0.4,-0.423,0.384);
+			ctx.bezierCurveTo(-0.45,0.304,-0.464,0.226,-0.464,0.144);
+			ctx.bezierCurveTo(-0.464,0.072,-0.45,0.005,-0.425,-0.052);
+			ctx.bezierCurveTo(-0.35,-0.221,-0.184,-0.33,-0.002,-0.33);
+			ctx.bezierCurveTo(0.254,-0.33,0.462,-0.117,0.462,0.145);
+			ctx.bezierCurveTo(0.462,0.244,0.384,0.324,0.289,0.324);
+			ctx.bezierCurveTo(0.193,0.324,0.115,0.244,0.115,0.145);
+			ctx.bezierCurveTo(0.115,0.081,0.062,0.028,-0.002,0.028);
+			ctx.bezierCurveTo(-0.066,0.028,-0.119,0.081,-0.119,0.145);
+			ctx.bezierCurveTo(-0.119,0.249,-0.081,0.346,-0.014,0.419);
+			ctx.bezierCurveTo(0.04,0.476,0.091,0.507,0.171,0.53);
+			ctx.bezierCurveTo(0.186,0.535,0.194,0.551,0.191,0.568);
+			ctx.bezierCurveTo(0.187,0.58,0.176,0.589,0.163,0.589);
+			ctx.lineTo(0.163,0.589);
+			ctx.lineTo(0.163,0.589);
+			ctx.closePath();
+			ctx.moveTo(0.277,0.464);
+			ctx.bezierCurveTo(0.21,0.464,0.151,0.445,0.102,0.41);
+			ctx.bezierCurveTo(0.018,0.349,-0.031,0.249,-0.031,0.144);
+			ctx.bezierCurveTo(-0.031,0.127,-0.018,0.114,-0.003,0.114);
+			ctx.bezierCurveTo(0.012,0.114,0.025,0.128,0.025,0.144);
+			ctx.bezierCurveTo(0.025,0.229,0.065,0.31,0.133,0.36);
+			ctx.bezierCurveTo(0.173,0.389,0.22,0.404,0.277,0.404);
+			ctx.bezierCurveTo(0.291,0.404,0.313,0.402,0.336,0.398);
+			ctx.bezierCurveTo(0.351,0.395,0.365,0.406,0.368,0.422);
+			ctx.bezierCurveTo(0.371,0.438,0.361,0.454,0.346,0.457);
+			ctx.bezierCurveTo(0.312,0.464,0.285,0.464,0.277,0.464);
+			ctx.lineTo(0.277,0.464);
+			ctx.lineTo(0.277,0.464);
+			ctx.closePath();
+			ctx.moveTo(-0.126,0.577);
+			ctx.bezierCurveTo(-0.134,0.577,-0.141,0.574,-0.147,0.568);
+			ctx.bezierCurveTo(-0.195,0.514,-0.222,0.481,-0.26,0.408);
+			ctx.bezierCurveTo(-0.299,0.333,-0.32,0.242,-0.32,0.144);
+			ctx.bezierCurveTo(-0.32,-0.037,-0.176,-0.183,-0.001,-0.183);
+			ctx.bezierCurveTo(0.174,-0.183,0.318,-0.037,0.318,0.144);
+			ctx.bezierCurveTo(0.318,0.161,0.305,0.174,0.29,0.174);
+			ctx.bezierCurveTo(0.275,0.174,0.262,0.16,0.262,0.144);
+			ctx.bezierCurveTo(0.262,-0.003,0.144,-0.123,-0.001,-0.123);
+			ctx.bezierCurveTo(-0.146,-0.123,-0.264,-0.004,-0.264,0.144);
+			ctx.bezierCurveTo(-0.264,0.231,-0.246,0.312,-0.212,0.377);
+			ctx.bezierCurveTo(-0.176,0.447,-0.151,0.478,-0.108,0.524);
+			ctx.bezierCurveTo(-0.097,0.536,-0.097,0.555,-0.109,0.567);
+			ctx.bezierCurveTo(-0.112,0.574,-0.119,0.577,-0.126,0.577);
+			ctx.lineTo(-0.126,0.577);
+			ctx.lineTo(-0.126,0.577);
+			ctx.closePath();
+			ctx.moveTo(-0.479,-0.156);
+			ctx.bezierCurveTo(-0.485,-0.156,-0.491,-0.158,-0.496,-0.161);
+			ctx.bezierCurveTo(-0.509,-0.171,-0.512,-0.19,-0.503,-0.204);
+			ctx.bezierCurveTo(-0.447,-0.289,-0.376,-0.355,-0.291,-0.402);
+			ctx.bezierCurveTo(-0.114,-0.501,0.112,-0.502,0.289,-0.403);
+			ctx.bezierCurveTo(0.374,-0.356,0.444,-0.29,0.501,-0.206);
+			ctx.bezierCurveTo(0.511,-0.192,0.508,-0.173,0.495,-0.164);
+			ctx.bezierCurveTo(0.482,-0.155,0.465,-0.157,0.456,-0.171);
+			ctx.bezierCurveTo(0.405,-0.247,0.341,-0.307,0.264,-0.349);
+			ctx.bezierCurveTo(0.103,-0.438,-0.104,-0.438,-0.265,-0.348);
+			ctx.bezierCurveTo(-0.341,-0.305,-0.406,-0.245,-0.455,-0.168);
+			ctx.bezierCurveTo(-0.461,-0.16,-0.47,-0.156,-0.479,-0.156);
+			ctx.lineTo(-0.479,-0.156);
+			ctx.lineTo(-0.479,-0.156);
+			ctx.closePath();
+			ctx.moveTo(0.327,-0.474);
+			ctx.bezierCurveTo(0.322,-0.474,0.318,-0.475,0.314,-0.478);
+			ctx.bezierCurveTo(0.206,-0.538,0.112,-0.564,0.001,-0.564);
+			ctx.bezierCurveTo(-0.111,-0.564,-0.217,-0.535,-0.313,-0.478);
+			ctx.bezierCurveTo(-0.327,-0.47,-0.343,-0.475,-0.351,-0.49);
+			ctx.bezierCurveTo(-0.358,-0.506,-0.353,-0.523,-0.339,-0.532);
+			ctx.bezierCurveTo(-0.235,-0.594,-0.119,-0.625,0.002,-0.625);
+			ctx.bezierCurveTo(0.121,-0.625,0.227,-0.596,0.341,-0.532);
+			ctx.bezierCurveTo(0.355,-0.524,0.361,-0.506,0.354,-0.491);
+			ctx.bezierCurveTo(0.346,-0.48,0.337,-0.474,0.327,-0.474);
+			ctx.lineTo(0.327,-0.474);
+			ctx.lineTo(0.327,-0.474);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+			ctx.save();
+			ctx.fillStyle="#FFFFFF";
+			ctx.beginPath();
+			ctx.moveTo(-0.34,-0.532);
+			ctx.bezierCurveTo(-0.354,-0.523,-0.359,-0.506,-0.352,-0.49);
+			ctx.bezierCurveTo(-0.344,-0.475,-0.328,-0.47,-0.314,-0.478);
+			ctx.bezierCurveTo(-0.217,-0.535,-0.112,-0.564,-0.001,-0.564);
+			ctx.lineTo(-0.001,-0.625);
+			ctx.bezierCurveTo(-0.121,-0.625,-0.236,-0.593,-0.34,-0.532);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(-0.29,-0.402);
+			ctx.bezierCurveTo(-0.375,-0.355,-0.446,-0.289,-0.502,-0.204);
+			ctx.bezierCurveTo(-0.511,-0.19,-0.508,-0.172,-0.495,-0.162);
+			ctx.bezierCurveTo(-0.49,-0.158,-0.484,-0.156,-0.478,-0.156);
+			ctx.bezierCurveTo(-0.469,-0.156,-0.46,-0.16,-0.456,-0.169);
+			ctx.bezierCurveTo(-0.405,-0.246,-0.341,-0.307,-0.265,-0.349);
+			ctx.bezierCurveTo(-0.184,-0.394,-0.092,-0.416,0,-0.416);
+			ctx.lineTo(0,-0.477);
+			ctx.bezierCurveTo(-0.101,-0.476,-0.202,-0.452,-0.29,-0.402);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(0,-0.183);
+			ctx.bezierCurveTo(-0.176,-0.183,-0.319,-0.037,-0.319,0.144);
+			ctx.bezierCurveTo(-0.319,0.242,-0.298,0.332,-0.259,0.408);
+			ctx.bezierCurveTo(-0.222,0.481,-0.195,0.514,-0.147,0.567);
+			ctx.bezierCurveTo(-0.141,0.574,-0.134,0.577,-0.126,0.577);
+			ctx.bezierCurveTo(-0.119,0.577,-0.112,0.574,-0.107,0.567);
+			ctx.bezierCurveTo(-0.095,0.556,-0.095,0.537,-0.106,0.525);
+			ctx.bezierCurveTo(-0.15,0.477,-0.174,0.448,-0.21,0.378);
+			ctx.bezierCurveTo(-0.245,0.312,-0.263,0.231,-0.263,0.144);
+			ctx.bezierCurveTo(-0.263,-0.003,-0.145,-0.123,0,-0.123);
+			ctx.lineTo(0,-0.123);
+			ctx.lineTo(0,-0.183);
+			ctx.lineTo(0,-0.183);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(-0.002,-0.332);
+			ctx.bezierCurveTo(-0.184,-0.332,-0.35,-0.222,-0.425,-0.053);
+			ctx.bezierCurveTo(-0.45,0.005,-0.464,0.071,-0.464,0.144);
+			ctx.bezierCurveTo(-0.464,0.226,-0.45,0.304,-0.423,0.384);
+			ctx.bezierCurveTo(-0.417,0.4,-0.401,0.407,-0.386,0.402);
+			ctx.bezierCurveTo(-0.371,0.397,-0.365,0.379,-0.369,0.363);
+			ctx.bezierCurveTo(-0.404,0.266,-0.407,0.191,-0.407,0.144);
+			ctx.bezierCurveTo(-0.407,0.081,-0.395,0.023,-0.374,-0.026);
+			ctx.bezierCurveTo(-0.308,-0.175,-0.162,-0.271,-0.002,-0.271);
+			ctx.bezierCurveTo(-0.001,-0.271,-0.001,-0.271,0,-0.271);
+			ctx.lineTo(0,-0.332);
+			ctx.bezierCurveTo(-0.001,-0.332,-0.001,-0.332,-0.002,-0.332);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(-0.031,0.144);
+			ctx.bezierCurveTo(-0.031,0.194,-0.02,0.242,0,0.286);
+			ctx.lineTo(0,0.114);
+			ctx.bezierCurveTo(-0.001,0.114,-0.002,0.114,-0.003,0.114);
+			ctx.bezierCurveTo(-0.019,0.114,-0.031,0.127,-0.031,0.144);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(-0.014,0.418);
+			ctx.bezierCurveTo(-0.081,0.345,-0.119,0.247,-0.119,0.144);
+			ctx.bezierCurveTo(-0.119,0.079,-0.066,0.026,-0.002,0.026);
+			ctx.bezierCurveTo(-0.001,0.026,-0.001,0.026,0,0.026);
+			ctx.lineTo(0,-0.035);
+			ctx.lineTo(-0.001,-0.035);
+			ctx.bezierCurveTo(-0.098,-0.035,-0.175,0.045,-0.175,0.144);
+			ctx.bezierCurveTo(-0.175,0.264,-0.132,0.376,-0.053,0.46);
+			ctx.bezierCurveTo(-0.035,0.48,-0.018,0.495,0,0.51);
+			ctx.lineTo(0,0.432);
+			ctx.bezierCurveTo(-0.005,0.427,-0.009,0.423,-0.014,0.418);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+			ctx.restore();
+			ctx.save();
+			ctx.fillStyle="#FFFFFF";
+			ctx.beginPath();
+			ctx.moveTo(0.004,0.701);
+			ctx.bezierCurveTo(0.004,0.704,0.002,0.706,-0.001,0.706);
+			ctx.lineTo(-0.001,0.706);
+			ctx.bezierCurveTo(-0.003,0.706,-0.006,0.704,-0.006,0.701);
+			ctx.lineTo(-0.006,-0.734);
+			ctx.bezierCurveTo(-0.006,-0.737,-0.003,-0.739,-0.001,-0.739);
+			ctx.lineTo(-0.001,-0.739);
+			ctx.bezierCurveTo(0.002,-0.739,0.004,-0.737,0.004,-0.734);
+			ctx.lineTo(0.004,0.701);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+		}		
+		ctx.restore();
 	}
 	
 	
 	
-	function getQRCode(text,qrCodeSize,addLogo,radius) {
+	function getQRCode(obj) {
+		var text=obj['data'],
+			qrCodeSize=obj['size']||200,
+			addLogo=obj['logo']||0,
+			radius=obj['r']||0,
+			symbol=obj['symbol']||0;
+		
 		//figure out alphabet to use
 		var alphabet='Byte';
 		if (text==text['replace'](/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \$\%\*\+\-\.\/\:]/g,"")) {
 			alphabet='Alphanumeric';
 		}
-		
-		//define defaults for optional values
-		qrCodeSize=qrCodeSize||200;										//set default size to 200 if not defined
-		addLogo=addLogo||false;											//set default as false
-		radius=radius||0;												//set default to 0
 		
 		//prep canvas for qr code
 		var canvas=document['createElement']('canvas');						//create a canvas to work with
@@ -2509,9 +2727,7 @@ var qrcode = function() {
 		}
 		if (addLogo>0) {
 			drawLogoBorder(ctx);												//draw the outer boarder
-			ctx['fillStyle']="#FFFFFF";											//set d color to be white
-			logoD(ctx);															//define d area	
-			ctx['fill']();															//fill in d area
+			logoD(ctx,symbol);															//define d area	
 		}
 		ctx['restore']();
 		ctx['restore']();
@@ -2548,7 +2764,38 @@ var qrcode = function() {
 	
 	
 	
+	/*
+		All return an encoded image.  can be directly set as img tags src
 	
+		DigiQR.request(address,amount,size,logo,radius);
+		DigiQR.address(address,size,logo,radius);
+		DigiQR.explorer(address,size,logo,radius);
+		DigiQR.text(data,size,logo,radius);
+		DigiQR.id(uri,size,logo,radius);
+	
+		DigiQR.gen({
+			"data":		string			value to encode in bar code,
+			"size":		unsigned int	optional size in pixels.  default 200
+			"logo":		unsigned int	optional logo.  defaults to off
+											0,false,undefined	no logo
+											1,true			 	logo with white box
+											2					logo with white circle
+											4					logo with no boarder
+											5					large logo with white dots
+											6					large logo with white squares		
+			"r":		unsigned float	optional module radius.  must be value between 0-1.  default 0
+			"symbol":	unsigned int	optional defaults to 0
+											0					DigiByte logo
+											1					DigiID logo
+		});
+	
+	
+	
+	
+	
+	
+	
+	*/
 	
 	
 	
@@ -2558,33 +2805,29 @@ var qrcode = function() {
 	//DigiQR
 	$["DigiQR"]={																//create interface for external scripts
 		"request": function(address,amount,size,logo,radius) {					//request payment interface
-			return getQRCode(
-						'digibyte:'+address+'?amount='+(amount)['toFixed'](8),
-						size,
-						logo,
-						radius
-					); 
+			return noProcess('digibyte:'+address+'?amount='+(amount)['toFixed'](8),size,logo,radius); 
 		},
 		"address": noProcess,													//general address interface
 		"explorer": function(address,size,logo,radius) {						//explorer interface
-			return getQRCode(
-						'https://digiexplorer.info/address/'+address,
-						size,
-						logo,
-						radius
-					);
+			return noProcess('https://digiexplorer.info/address/'+address,size,logo,radius);
 		},
 		"text": noProcess,														//text interface(Same as address but added because some times calling this makes more sense)
-
+		"gen": getQRCode,
+		"id": function(uri,size,logo,radius) {
+			return noProcess(uri,size,logo,radius,1);
+		}
 	};
-	function noProcess(text,size,logo,radius) {									//text interface(Same as address but added because some times calling this makes more sense)
-		return getQRCode(
-					text,
-					size,
-					logo,
-					radius
-				);
+	function noProcess(data,size,logo,radius,symbol) {							//text interface(Same as address but added because some times calling this makes more sense)
+		return getQRCode({
+			"data":	data,
+			"size":	size,
+			"logo":	logo,
+			"r":	radius,
+			"symbol":symbol
+		});
 	}
+	
+	
 	
 	
 
