@@ -52,7 +52,7 @@
 			var cc=canvasCorner["getContext"]("2d");						//get canvas context
 			cc["fillStyle"]=color;
 			
-			//draw corners
+			//Draw Corners
 			function drawCorner(v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11) {
 				cc[beginPath]();
 				cc["moveTo"](v0,v1);
@@ -64,12 +64,12 @@
 				cc[closePath]();
 				cc["fill"]();
 			}
-			if ((i==1)||(i==9)) drawCorner(p4,p4,p2,p4,p2,p3,p3,p3,  1,1.5,p4,p2);			//draw bottom left
+			if ((i==1)||(i==9)) drawCorner(p4,p4,p2,p4,p2,p3,p3,p3,  1,1.5,p4,p2);			//draw bottom right
 			if ((i==8)||(i==9)) drawCorner( 0, 0,p2, 0,p2,p1,p1,p1,  0,0.5, 0,p2);			//draw top left
 			if ((i==4)||(i==6)) drawCorner(p4, 0,p4,p2,p3,p2,p3,p1,0.5,  1,p2,0);			//draw top right
 			if ((i==2)||(i==6)) drawCorner( 0,p4, 0,p2,p1,p2,p1,p3,1.5,  0,p2,p4);			//draw bottom left
 			
-			//draw flats
+			//Draw Flats
 			if (i==3)  cc["fillRect"](0,p2,p4,p2);											//draw bottom
 			if (i==12) cc["fillRect"](0,0,p4,p2);											//draw top
 			if (i==10) cc["fillRect"](0,0,p2,p4);											//draw left
@@ -356,7 +356,7 @@
 			addLogo=obj["logo"]||0,
 			radius=obj["r"]||0,
 			symbol=obj["symbol"]||0;
-		
+			
 		//figure out alphabet to use
 		var alphabet="Byte";
 		if (text==text["replace"](/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \$\%\*\+\-\.\/\:]/g,"")) {
@@ -391,14 +391,14 @@
 		if (addLogo<5) {
 			logoSize*=Math["min"](Math["floor"]((Math["sqrt"](0.2*count*count)+1)/2)-0.5,(count-16)*0.5);	//cover up to 20% of logo but make sure not covering eyes
 		} else if(addLogo<7) {
-			logoSize*=(count-1)*0.5;												//logo mostly translucent so rules are simpler
+			logoSize*=(count-1)*0.4;												//logo mostly translucent so rules are simpler
 		} else {
 			logoSize*=Math["min"](1.12*Math["sqrt"](count*count*0.5)-11.08,count*0.56);	//make logo as big as possible to not touch eyes
 		}		
 		
 		//draw corners
 		function drawGrid(color) {
-			var corners=createCorners(pixelSize,radius,color);			//draw non dark areas in white
+			var corners=createCorners(pixelSize,Math.abs(radius),color);			//draw non dark areas in white
 			var rsMax=logoSize/pixelSize;								//get number of modules logo is across
 			rsMax*=rsMax;												//get square of radius
 		
@@ -415,6 +415,11 @@
 			for (var y=-1;y<=count;y++) {											//go over each row
 				for (var x=-1;x<=count;x++) {										//go over each column
 					var i=numFilter(x,y)*8+numFilter(x+1,y)*4+numFilter(x,y+1)*2+numFilter(x+1,y+1);	//get corner type
+					if (radius<0) { //draw only eyes
+						if ((x>6) && (y>6)) i=15;
+						if ((x>6) && (x<count-8)) i=15;
+						if ((y>6) && (y<count-8)) i=15;
+					}					
 					ctx["drawImage"](corners[i],(x+0.5)*pixelSize,(y+0.5)*pixelSize);	//draw the corner on canvas
 				}
 			}		
@@ -445,7 +450,10 @@
 		}
 		ctx["restore"]();
 		ctx["restore"]();
-		if ((addLogo==5)||(addLogo==7)) {														
+		
+		
+		//draw dots
+		if ((addLogo==5)||(addLogo==7)||(radius<0)) {														
 			ctx["save"]();
 			ctx["transform"](pixelSize,0,0,pixelSize,pixelSize/2,pixelSize/2);		//adjust size to make drawing dots easy
 			ctx["save"]();
@@ -460,6 +468,7 @@
 					}
 					if ((addLogo==5)&&(!qr["isDark"](x,y))) drawDot(0.5,"rgba(255,255,255,0.5)");	//make translucent white dots
 					if (addLogo==7) drawDot(0.2,(qr["isDark"](x,y))?"#000000":"#FFFFFF");			//make small dot for both colors
+					if (radius<0) drawDot(0.4,(qr["isDark"](x,y))?"#000000":"#FFFFFF");
 				}
 			}
 			ctx["restore"]();
