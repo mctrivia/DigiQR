@@ -101,21 +101,26 @@
 		
 		return corner;
 	}
-	function drawLogoBorder(ctx) {
-		ctx[beginPath]();
-		ctx["fillStyle"]="#0066cc";
-		ctx["arc"](0,0,0.891,0,2*Math.PI);
-		ctx[closePath]();
-		ctx["fill"]();
-		ctx[beginPath]();
-		ctx["fillStyle"]="#002352";
-		ctx["arc"](0,0,0.709,0,2*Math.PI);
-		ctx[closePath]();
-		ctx["fill"]();
+	function drawLogoBorder(ctx,symbol) {
+		if (symbol<2) {
+			ctx[beginPath]();
+			ctx["fillStyle"]="#0066cc";
+			ctx["arc"](0,0,0.891,0,2*Math.PI);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx[beginPath]();
+			ctx["fillStyle"]="#002352";
+			ctx["arc"](0,0,0.709,0,2*Math.PI);
+			ctx[closePath]();
+			ctx["fill"]();
+		}
 	}
 	function logoD(ctx,symbol) {
 		ctx["save"]();
-		if (symbol==0) {
+		switch (symbol) {
+			
+			//DigiByte
+			case 0:
 			ctx["fillStyle"]="#FFFFFF";											//set d color to be white
 			ctx[beginPath]();
 			ctx["moveTo"]( 0.245,-0.361);
@@ -154,7 +159,10 @@
 			ctx[bezierCurveTo]( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
 			ctx[closePath]();
 			ctx["fill"]();															//fill in d area
-		} else {
+			break;
+			
+			//Digi ID
+			case 1:
 			ctx["miterLimit"]="0";
 			ctx["save"]();
 			ctx["save"]();
@@ -344,6 +352,198 @@
 			ctx[closePath]();
 			ctx["fill"]();
 			ctx["restore"]();
+			break;
+			
+			//Antum ID
+			case 2:
+			ctx["translate"](-0.87,-0.8);
+			ctx["scale"](0.07,0.07);
+			ctx["save"]();
+			ctx["strokeStyle"]="rgba(0,0,0,0)";
+			ctx["miterLimit"]=4;
+			ctx["scale"](0.465,0.465);
+			ctx["translate"](0.222,0);
+			ctx["scale"](0.463,0.463);
+			ctx["save"]();
+			var g = ctx["createLinearGradient"](165.69,271.09,165.69,205.77);
+			g["addColorStop"](0,"#dfddda");
+			g["addColorStop"](1,"#b7ced7");
+			
+			var getCTX=function(x,g) {
+				var canvas = document["createElement"]("canvas");
+				canvas["width"] = 1263;
+				canvas["height"] = 689;				
+				var ctx1 = canvas["getContext"]("2d");								
+				ctx1["fillStyle"]=g;
+				ctx1["save"]();
+				ctx1["strokeStyle"]="rgba(0,0,0,0)";
+				ctx1["miterLimit"]=4;
+				ctx1[beginPath]();
+				ctx1["moveTo"](0,0);
+				ctx1[lineTo](1263,0);
+				ctx1[lineTo](1263,689);
+				ctx1[lineTo](0,689);
+				ctx1[closePath]();
+				ctx1["clip"]();
+				ctx1["save"]();
+				switch (x) {
+					case 1:
+					ctx1["translate"](3.33,-5.24);
+					ctx1["rotate"](0.0113);
+					break;
+					
+					case 2:
+					ctx1["transform"](-1,-0.05,-0.05,1,1403.03,43.69);
+					break;
+					
+					case 3:
+					ctx1["translate"](-361.39,43.69);
+					ctx1["rotate"](-0.0482);
+			
+				}
+				ctx1["save"]();
+				ctx1[beginPath]();
+				ctx1["moveTo"](-10000,-10000);
+				ctx1[lineTo](20000,-10000);
+				ctx1["quadraticCurveTo"](20000,-10000,20000,-10000);
+				ctx1[lineTo](20000,20000);
+				ctx1["quadraticCurveTo"](20000,20000,20000,20000);
+				ctx1[lineTo](-10000,20000);
+				ctx1["quadraticCurveTo"](-10000,20000,-10000,20000);
+				ctx1[lineTo](-10000,-10000);
+				ctx1["quadraticCurveTo"](-10000,-10000,-10000,-10000);
+				ctx1[closePath]();
+				ctx1["fill"]();
+				ctx1["stroke"]();
+				ctx1["restore"]();
+				ctx1["restore"]();
+				ctx1["restore"]();
+				return ctx1;
+			}
+			
+			var ctx1=getCTX(1,g);
+			var p = ctx1["createPattern"](ctx1.canvas,"no-repeat");
+			ctx["fillStyle"]=p;
+			ctx["translate"](-108.36,-202.39);
+			ctx[beginPath]();
+			ctx["moveTo"](167.06,202.39);
+			ctx[lineTo](166.84,202.79);
+			ctx[bezierCurveTo](165.84,216.38,144.22,257.92,144.22,257.92);
+			ctx[lineTo](143.67,257.92);
+			ctx[lineTo](156.14,267.58);
+			ctx["translate"](166.24,270.338);
+			ctx["arc"](0,0,10.47,-2.875,-1.592,0);
+			ctx["translate"](-166.24,-270.338);
+			ctx["translate"](165.627,270.233);
+			ctx["arc"](0,0,10.37,-1.533,-0.32,0);
+			ctx["translate"](-165.627,-270.233);
+			ctx[lineTo](188.2,258.42);
+			ctx[lineTo](188.42,258.01);
+			ctx[bezierCurveTo](188.42,258.01,167.79,216,167.06,202.39);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			var g = ctx["createLinearGradient"](1184.86,332,1213.41,282.55);
+			g["addColorStop"](0,"#0098d5");
+			g["addColorStop"](1,"#164c8e");
+			var ctx2 = getCTX(2,g);
+			var p = ctx2["createPattern"](ctx2.canvas,"no-repeat");
+			ctx["fillStyle"]=p;
+			ctx["translate"](-108.36,-202.39);
+			ctx[beginPath]();
+			ctx["moveTo"](223,308.18);
+			ctx[lineTo](222.61,308.18);
+			ctx[bezierCurveTo](217.61,305.62,206.78,302.68,196.1,301.12);
+			ctx["translate"](160.783,539.68);
+			ctx["arc"](0,0,241.16,-1.423,-1.537,1);
+			ctx["translate"](-160.783,-539.68);
+			ctx[lineTo](169.59,280.41);
+			ctx[bezierCurveTo](165.01,268.47,169.59,280.41,171.37,276);
+			ctx[bezierCurveTo](173.03,271.86,174.25,277.36,171.75,274);
+			ctx[lineTo](189.15,261.44);
+			ctx[lineTo](189.55,261.44);
+			ctx[bezierCurveTo](189.55,261.44,213,301.05,223,308.18);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			var g = ctx["createLinearGradient"](26442.139,14187.645,28023.673,11874.869);
+			g["addColorStop"](0,"#0098d5");
+			g["addColorStop"](1,"#164c8e");
+			var ctx3 = getCTX(3,g);
+			var p = ctx3["createPattern"](ctx3.canvas,"no-repeat");
+			ctx["fillStyle"]=p;
+			ctx["translate"](-108.36,-202.39);
+			ctx[beginPath]();
+			ctx["moveTo"](108.36,308.18);
+			ctx[lineTo](108.75,308.18);
+			ctx[bezierCurveTo](113.75,305.62,124.58,302.68,135.26,301.12);
+			ctx["translate"](170.837,539.641);
+			//ctx.rotate(0);
+			ctx["arc"](0,0,241.16,-1.719,-1.606,0);
+			//ctx.rotate(0);
+			ctx["translate"](-170.837,-539.641);
+			ctx[lineTo](161.78,280.38);
+			ctx[bezierCurveTo](166.36,268.44,161.78,280.38,160,275.97);
+			ctx[bezierCurveTo](158.34,271.83,157.12,277.33,159.62,273.97);
+			ctx[lineTo](142.22,261.41);
+			ctx[lineTo](141.82,261.41);
+			ctx[bezierCurveTo](141.82,261.41,118.33,301.05,108.36,308.18);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			ctx["fillStyle"]="#fff";
+			ctx["translate"](-108.36,-202.39);
+			ctx[beginPath]();
+			ctx["moveTo"](178.91,271.58);
+			ctx[bezierCurveTo](178.91,278.88,173.27,284.79,166.31,284.79);
+			ctx[bezierCurveTo](159.35,284.79,153.71,278.88,153.71,271.58);
+			ctx[bezierCurveTo](153.71,264.28,159.35,258.37,166.31,258.37);
+			ctx[bezierCurveTo](173.27,258.37,178.91,264.29,178.91,271.58);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			ctx["fillStyle"]="#fff";
+			ctx[beginPath]();
+			ctx["moveTo"](33.86,59.01);
+			ctx[lineTo](35.32,55.53);
+			ctx[lineTo](46.33,64.07);
+			ctx[lineTo](45.47,67.39);
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			ctx["fillStyle"]="#fff";
+			ctx[beginPath]();
+			ctx["moveTo"](81.18,58.99);
+			ctx[lineTo](80.07,55.63);
+			ctx[lineTo](69.18,63.2);
+			ctx[lineTo](70.3,66.58);
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["save"]();
+			ctx["fillStyle"]="#fff";
+			ctx[beginPath]();
+			ctx["moveTo"](52.96,80.53);
+			ctx[lineTo](61.14,80.53);
+			ctx[lineTo](60.63,96.28);
+			ctx[lineTo](54.02,96.28);
+			ctx[lineTo](52.96,80.53);
+			ctx[lineTo](52.96,80.53);
+			ctx[closePath]();
+			ctx["fill"]();
+			ctx["stroke"]();
+			ctx["restore"]();
+			ctx["restore"]();
+			break;
 		}		
 		ctx["restore"]();
 	}
@@ -445,7 +645,7 @@
 			ctx["fill"]();
 		}
 		if (addLogo>0) {
-			drawLogoBorder(ctx);												//draw the outer boarder
+			drawLogoBorder(ctx,symbol);												//draw the outer boarder
 			logoD(ctx,symbol);															//define d area	
 		}
 		ctx["restore"]();
@@ -518,7 +718,7 @@
 	//DigiQR
 	window["DigiQR"]={																//create interface for external scripts
 		"request": function(address,amount,size,logo,radius) {					//request payment interface
-			return noProcess("digibyte:"+address+"?amount="+(amount)["toFixed"](8),size,logo,radius); 
+			return noProcess("digibyte:"+address+((amount==0)?0:"?amount="+(amount)["toFixed"](8)),size,logo,radius); 
 		},
 		"address": noProcess,													//general address interface
 		"explorer": function(address,size,logo,radius) {						//explorer interface
@@ -528,6 +728,9 @@
 		"gen": getQRCode,
 		"id": function(uri,size,logo,radius) {
 			return noProcess(uri,size,logo,radius,1);
+		},
+		"antum": function(uri,size,logo,radius) {
+			return noProcess(uri,size,logo,radius,2);
 		},
 		"auto": autoLoad
 	};
