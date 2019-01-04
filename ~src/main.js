@@ -117,10 +117,8 @@
 	}
 	function logoD(ctx,symbol) {
 		ctx["save"]();
-		switch (symbol) {
-			
-			//DigiByte
-			case 0:
+		
+		var logoDigiByte=function() {
 			ctx["fillStyle"]="#FFFFFF";											//set d color to be white
 			ctx[beginPath]();
 			ctx["moveTo"]( 0.245,-0.361);
@@ -159,10 +157,8 @@
 			ctx[bezierCurveTo]( 0.606,-0.260, 0.392,-0.346, 0.245,-0.361);
 			ctx[closePath]();
 			ctx["fill"]();															//fill in d area
-			break;
-			
-			//Digi ID
-			case 1:
+		}
+		var logoDigiID=function() {
 			ctx["miterLimit"]="0";
 			ctx["save"]();
 			ctx["save"]();
@@ -352,11 +348,9 @@
 			ctx[closePath]();
 			ctx["fill"]();
 			ctx["restore"]();
-			break;
-			
-			//Antum ID
-			case 2:
-			ctx["translate"](-0.87,-0.8);
+		}
+		var logoAntum=function() {
+			ctx["translate"](-0.88,-0.8);
 			ctx["scale"](0.07,0.07);
 			ctx["save"]();
 			ctx["strokeStyle"]="rgba(0,0,0,0)";
@@ -543,7 +537,42 @@
 			ctx["stroke"]();
 			ctx["restore"]();
 			ctx["restore"]();
+		}
+		
+		
+		
+		
+		
+		
+		
+		switch (symbol) {
+			
+			//DigiByte
+			case 0:
+			logoDigiByte();
 			break;
+			
+			//Digi ID
+			case 1:
+			logoDigiID();
+			break;
+			
+			//Antum ID
+			case 2:
+			logoAntum();
+			break;
+			
+			//Open ANtum ID
+			case 3:
+			logoAntum();
+			ctx["restore"]();
+			ctx["save"]();
+			ctx["translate"](0,0.24);
+			ctx["scale"](0.1,0.1);
+			drawLogoBorder(ctx,0);
+			logoDigiByte();
+			//ctx["restore"]();
+			
 		}		
 		ctx["restore"]();
 	}
@@ -731,6 +760,9 @@
 		},
 		"antum": function(uri,size,logo,radius) {
 			return noProcess(uri,size,logo,radius,2);
+		},
+		"openantum": function(uri,size,logo,radius) {
+			return noProcess(uri,size,logo,radius,3);
 		},
 		"auto": autoLoad
 	};
