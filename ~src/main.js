@@ -586,6 +586,7 @@
 			radius=obj["r"]||0,
 			symbol=obj["symbol"]||0;
 			
+			
 		//figure out alphabet to use
 		var alphabet="Byte";
 		if (text==text["replace"](/[^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \$\%\*\+\-\.\/\:]/g,"")) {
@@ -705,6 +706,21 @@
 		}	
 		if (addLogo==6) {
 			drawGrid("rgba(255,255,255,0.5)");
+		}
+		
+		//draw x if DigiID and uri does not match current domain
+		if ((symbol>0) && (window.location.hostname!=text.split('/')[2])) {
+			ctx["save"]();
+			ctx["strokeStyle"]="#ff0000";
+			ctx["lineWidth"]=pixelSize;
+			
+			ctx["moveTo"](0,0);
+			ctx[lineTo](count*pixelSize,count*pixelSize);
+			ctx["stroke"]();
+			ctx["moveTo"](count*pixelSize,0);
+			ctx[lineTo](0,count*pixelSize);
+			ctx["stroke"]();
+			ctx["restore"]();
 		}
 		
 		ctx["restore"]();														//restore so image is centered
