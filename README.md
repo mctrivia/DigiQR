@@ -5,6 +5,8 @@ QR code generator for digibyte
 `<img class="DigiQR" uri="HTTP://123AB" size="OPTIONAL_SIZE" logo="OPTIONAL_LOGO_VERSION" r="1">`
  - DigiID logo will automatically be used if uri starts with `digiid://`
  - All fields but class and uri are optional
+ - Will automatically be made clickable
+ - Library file must be added at end of html to use in this way
 
 
 ## Generating changable QR Code

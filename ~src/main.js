@@ -439,11 +439,11 @@
 			ctx["stroke"]();
 			ctx["restore"]();
 			ctx["save"]();
-			var g = ctx["createLinearGradient"](1184.86,332,1213.41,282.55);
+			g = ctx["createLinearGradient"](1184.86,332,1213.41,282.55);
 			g["addColorStop"](0,"#0098d5");
 			g["addColorStop"](1,"#164c8e");
 			var ctx2 = getCTX(2,g);
-			var p = ctx2["createPattern"](ctx2.canvas,"no-repeat");
+			p = ctx2["createPattern"](ctx2.canvas,"no-repeat");
 			ctx["fillStyle"]=p;
 			ctx["translate"](-108.36,-202.39);
 			ctx[beginPath]();
@@ -464,11 +464,11 @@
 			ctx["stroke"]();
 			ctx["restore"]();
 			ctx["save"]();
-			var g = ctx["createLinearGradient"](26442.139,14187.645,28023.673,11874.869);
+			g = ctx["createLinearGradient"](26442.139,14187.645,28023.673,11874.869);
 			g["addColorStop"](0,"#0098d5");
 			g["addColorStop"](1,"#164c8e");
 			var ctx3 = getCTX(3,g);
-			var p = ctx3["createPattern"](ctx3.canvas,"no-repeat");
+			p = ctx3["createPattern"](ctx3.canvas,"no-repeat");
 			ctx["fillStyle"]=p;
 			ctx["translate"](-108.36,-202.39);
 			ctx[beginPath]();
@@ -755,6 +755,12 @@
 			var r=parseFloat(domCheck[i]["getAttribute"]("r")||0.5);
 			var symbol=(data["toLowerCase"]()["substr"](0,9)=="digiid://")?1:0;
 			domCheck[i]["src"]=noProcess(data,size,logo,r,symbol);
+			domCheck[i]["style"]["cursor"]="pointer";
+			(function(data) {
+				domCheck[i]["addEventListener"]('click',function() {
+					window["open"](data, '_blank');
+				});
+			})(data);
 		}
 	}
 	autoLoad();

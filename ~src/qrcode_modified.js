@@ -389,16 +389,13 @@
 
       switch(mode) {
       case 'Numeric' :
-        newData = qrNumber(data);
-        break;
+        //newData = qrNumber(data);			//never used in DigiByte related so not included defaults to Alphanumeric if some how there
+        //break;
       case 'Alphanumeric' :
         newData = qrAlphaNum(data);
         break;
       case 'Byte' :
         newData = qr8BitByte(data);
-        break;
-      case 'Kanji' :
-        newData = qrKanji(data);
         break;
       default :
         throw 'mode:' + mode;
