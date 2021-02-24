@@ -709,7 +709,7 @@
 		}
 		
 		//draw x if DigiID and uri does not match current domain
-		if ((symbol>0) && (window.location.hostname!=text.split('/')[2])) {
+		if ((symbol>0) && (window.location.hostname.toLowerCase()!=text.toLowerCase().split('/')[2])) {
 			ctx["save"]();
 			ctx["strokeStyle"]="#ff0000";
 			ctx["lineWidth"]=pixelSize;
