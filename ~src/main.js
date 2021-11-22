@@ -751,11 +751,11 @@
 		for (var i=0; i<domCheck["length"]; i++) {										//go through each of the class far dom items and get its index in array
 			var data=domCheck[i]["getAttribute"]("uri");
 			if (!data) {
-				var address = domCheck[i]["getAttribute"]("address") || false;
+				var address = domCheck[i]["getAttribute"]("address");
 				if (!address) continue;
-				var amount = domCheck[i]["getAttribute"]("amount") || false;
+				var amount = parseFloat(domCheck[i]["getAttribute"]("amount"));
 				data = "digibyte:"+address;
-				if (amount) data += ((amount==0)?0:"?amount="+(parseFloat(amount))["toFixed"](8));
+				if (!isNaN(amount) && amount) data += "?amount="+(amount)["toFixed"](8);
 			}
 
 			var size=parseInt(domCheck[i]["getAttribute"]("size")||300);
