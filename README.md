@@ -7,7 +7,7 @@ QR code generator for digibyte
 `<img class="DigiQR" address="DIGIBYTE_ADDRESS" amount="DIGIBYTE_AMOUNT_REQUESTED" size="OPTIONAL_SIZE" logo="OPTIONAL_LOGO_VERSION" r="1">`
  - DigiID logo will automatically be used if uri starts with `digiid://`
  - All fields but class are optional
- - You can plase a 'uri' field or a 'address' field to generate a qr.
+ - You can place a 'uri' field or a 'address' field to generate a qr.
  - If you use an 'address' field you can add an 'amount' field to request payment 
  - Will automatically be made clickable
  - Library file must be added at end of html to use in this way
