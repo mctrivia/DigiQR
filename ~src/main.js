@@ -749,7 +749,15 @@
 	var autoLoad=function() {
 		var domCheck=document["getElementsByClassName"]("DigiQR");
 		for (var i=0; i<domCheck["length"]; i++) {										//go through each of the class far dom items and get its index in array
-			var data=domCheck[i]["getAttribute"]("uri");
+			var data=domCheck[i]["getAttribute"]("uri") || null;
+			if (!data)
+			{
+				var address = domCheck[i]["getAttribute"]("address") || null;
+				var amount = domCheck[i]["getAttribute"]("amount") || null;
+				if (address) data = "digibyte:"+address;
+				if (amount) data += ((amount==0)?0:"?amount="+(parseFloat(amount))["toFixed"](8));
+			}
+
 			var size=parseInt(domCheck[i]["getAttribute"]("size")||300);
 			var logo=parseInt(domCheck[i]["getAttribute"]("logo")||6);
 			var r=parseFloat(domCheck[i]["getAttribute"]("r")||0.5);

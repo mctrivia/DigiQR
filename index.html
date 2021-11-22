@@ -1,6 +1,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<script src="digiQR.min.js"></script>
 <img id="c1"><br>
 <img id="qr"><br>
 Address: <input type="text" id="address" value="DLExRXZ4oXnEWEpP6bNYG4urNLnDr4jJ2n"><br>
@@ -31,8 +30,10 @@ To install on your on web site <a href="digiQR.min.js" download>download digiQR.
 
 Code here: <a href="https://github.com/mctrivia/DigiQR">GitHub Code</a><br>
 Donations Welcome:<br>
-<img id="donate"><br>
+<img class="DigiQR" address="DLExRXZ4oXnEWEpP6bNYG4urNLnDr4jJ2n" size="200" logo="6" r="1"><br>
 DLExRXZ4oXnEWEpP6bNYG4urNLnDr4jJ2n
+
+<script src="digiQR.min.js"></script>
 <script>
 	function redraw() {
 		var e=document.getElementById("logo");
@@ -98,8 +99,5 @@ DLExRXZ4oXnEWEpP6bNYG4urNLnDr4jJ2n
 	document.getElementById("radius").addEventListener("change",redraw);
 	document.getElementById("width").addEventListener("change",redraw);
 	redraw();
-	
-	
-	document.getElementById("donate").src=DigiQR.address("DLExRXZ4oXnEWEpP6bNYG4urNLnDr4jJ2n",200,6,1);
 	
 </script>
